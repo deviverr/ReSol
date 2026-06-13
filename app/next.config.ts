@@ -1,12 +1,13 @@
 import type { NextConfig } from "next";
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const isStaticExport = basePath.length > 0;
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: isStaticExport ? "export" : undefined,
   basePath,
   images: {
-    unoptimized: true,
+    unoptimized: isStaticExport,
   },
 };
 

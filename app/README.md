@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ReSol Web App
 
-## Getting Started
+Next.js frontend for the ReSol devnet beta.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Copy `../.env.example` to `.env.local` and fill in Supabase values for local or
+hosted testing.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Vercel beta
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Vercel should use this `app/` directory as the project root. Set these
+production environment variables and leave `NEXT_PUBLIC_BASE_PATH` unset:
 
-## Learn More
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- `NEXT_PUBLIC_SOLANA_CLUSTER=devnet`
+- `NEXT_PUBLIC_RPC_URL`
+- `NEXT_PUBLIC_PROGRAM_ID`
+- `NEXT_PUBLIC_USDC_MINT`
+- `NEXT_PUBLIC_TREASURY`
 
-To learn more about Next.js, take a look at the following resources:
+Checks before release:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm lint
+pnpm build
+pnpm verify:devnet
+pnpm verify:supabase
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## GitHub Pages demo
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The repository Pages workflow sets `NEXT_PUBLIC_BASE_PATH=/ReSol`, which turns
+on static export and keeps the public demo URL working.

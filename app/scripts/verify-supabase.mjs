@@ -8,6 +8,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { Keypair } from "@solana/web3.js";
 import nacl from "tweetnacl";
+import { Buffer } from "node:buffer";
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL ?? "http://127.0.0.1:54321";
 const KEY =
@@ -144,6 +145,27 @@ async function main() {
     .eq("id", listing.id)
     .single();
   check("listing reopened to Active after cancel", afterCancel?.status === "Active");
+
+  // ---- storage: authenticated wallets can upload listing photos ----
+  const photoPath = `${seller.publicKey.toBase58()}/verify-${Date.now()}.txt`;
+  const { error: uploadErr } = await sellerSb.storage
+    .from("listing-photos")
+    .upload(photoPath, Buffer.from("Resol storage verification"), {
+      contentType: "text/plain",
+      upsert: false,
+    });
+  check("seller can upload to listing-photos bucket", !uploadErr);
+  if (uploadErr) console.log("   upload error:", uploadErr.message);
+
+  const { data: publicUrl } = sellerSb.storage
+    .from("listing-photos")
+    .getPublicUrl(photoPath);
+  check(
+    "listing-photos returns a public URL",
+    typeof publicUrl?.publicUrl === "string" &&
+      publicUrl.publicUrl.includes("listing-photos")
+  );
+  await sellerSb.storage.from("listing-photos").remove([photoPath]);
 
   summary();
 }

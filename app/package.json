@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "verify:supabase": "node scripts/verify-supabase.mjs",
+    "verify:devnet": "node scripts/verify-devnet-program.mjs"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.31.1",
