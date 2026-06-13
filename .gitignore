@@ -1,0 +1,27 @@
+# Secrets / keypairs — NEVER commit
+keys/
+*.pem
+.env
+.env.local
+.env*.local
+
+# Anchor / Rust
+anchor/.anchor/
+anchor/target/
+**/*.rs.bk
+
+# Node
+node_modules/
+.pnpm-store/
+app/.next/
+app/out/
+dist/
+build/
+
+# Supabase
+supabase/.branches/
+supabase/.temp/
+
+# Misc
+.DS_Store
+*.log

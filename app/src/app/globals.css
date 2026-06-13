@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ */
+/*  Resol design system — friendly liquid glass + friendly purple      */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-bg: #f6f4fc;
+  --color-bg-2: #efe9fb;
+  --color-surface: #ffffff;
+  --color-ink: #211d34;
+  --color-ink-soft: #6b6680;
+  --color-line: #e7e1f4;
+
+  /* friendly purple */
+  --color-purple-50: #f3effe;
+  --color-purple-100: #e7defe;
+  --color-purple-200: #cdb8fc;
+  --color-purple-300: #b095f8;
+  --color-purple-400: #9670f3;
+  --color-purple-500: #7b53ec;
+  --color-purple-600: #6a3fe0;
+  --color-purple-700: #5730bf;
+
+  /* warm terracotta secondary accent */
+  --color-terracotta: #e8765a;
+  --color-terracotta-soft: #f4a48f;
+
+  /* liquid silver */
+  --color-silver-1: #f4f5f9;
+  --color-silver-2: #d9dce8;
+  --color-silver-3: #b9bdd0;
+
+  --color-success: #2fbf8f;
+  --color-warning: #e8a13a;
+  --color-danger: #e3556b;
+
+  --radius-card: 1.5rem;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Soft, living gradient backdrop with drifting purple/silver light. */
+.resol-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(60rem 60rem at 12% -10%, #e7defe 0%, transparent 55%),
+    radial-gradient(48rem 48rem at 105% 8%, #f4d9d0 0%, transparent 50%),
+    radial-gradient(50rem 50rem at 50% 120%, #d9dce8 0%, transparent 55%),
+    linear-gradient(180deg, #f6f4fc 0%, #efe9fb 100%);
+}
+.resol-bg::before,
+.resol-bg::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  animation: drift 18s ease-in-out infinite alternate;
+}
+.resol-bg::before {
+  width: 30rem;
+  height: 30rem;
+  left: -6rem;
+  top: 8rem;
+  background: radial-gradient(circle, #b095f8 0%, transparent 70%);
+}
+.resol-bg::after {
+  width: 26rem;
+  height: 26rem;
+  right: -4rem;
+  bottom: 4rem;
+  background: radial-gradient(circle, #f4a48f 0%, transparent 70%);
+  animation-delay: -7s;
+}
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(2rem, -1.5rem, 0) scale(1.12); }
+}
+
+/* ---- Glass surfaces ---- */
+.glass {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 10px 30px -12px rgba(74, 47, 140, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 16px 40px -16px rgba(74, 47, 140, 0.32);
+}
+.glass-purple {
+  background: linear-gradient(135deg, rgba(123, 83, 236, 0.16), rgba(150, 112, 243, 0.08));
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(176, 149, 248, 0.4);
+  box-shadow: 0 12px 32px -14px rgba(106, 63, 224, 0.4);
+}
+
+/* Liquid silver — metallic sheen for chips and small accents. */
+.silver {
+  background: linear-gradient(135deg, #ffffff 0%, #eceef5 35%, #d9dce8 60%, #f4f5f9 100%);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.9), 0 4px 12px -6px rgba(60, 60, 90, 0.25);
+}
+
+/* Friendly purple gradient — primary buttons / brand marks. */
+.purple-grad {
+  background: linear-gradient(135deg, #9670f3 0%, #7b53ec 50%, #6a3fe0 100%);
+}
+.purple-glow {
+  box-shadow: 0 10px 28px -8px rgba(106, 63, 224, 0.55);
+}
+
+/* hide scrollbar on filter chip rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* shimmer for loading skeletons */
+.skeleton {
+  background: linear-gradient(100deg, #ece8f6 30%, #f6f3fd 50%, #ece8f6 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+@keyframes pop-in {
+  0% { transform: scale(0.96); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.pop-in { animation: pop-in 0.25s ease-out both; }

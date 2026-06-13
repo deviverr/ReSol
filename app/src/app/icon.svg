@@ -1,0 +1,41 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#efe7fb"/>
+      <stop offset="1" stop-color="#d8c6f3"/>
+    </linearGradient>
+    <radialGradient id="sphereBig" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#c9aef0" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#9b6fe0" stop-opacity="0.75"/>
+    </radialGradient>
+    <radialGradient id="sphereSmall" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#b89af0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#8454d8" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="sphereTiny" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="50%" stop-color="#d8c2f7" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#a87aea" stop-opacity="0.75"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="112" fill="url(#glow)"/>
+
+  <circle cx="330" cy="350" r="92" fill="url(#sphereTiny)" filter="url(#soft)" opacity="0.9"/>
+  <circle cx="200" cy="320" r="118" fill="url(#sphereSmall)"/>
+  <circle cx="300" cy="190" r="148" fill="url(#sphereBig)"/>
+
+  <ellipse cx="252" cy="138" rx="58" ry="34" fill="#ffffff" opacity="0.55"/>
+  <ellipse cx="166" cy="278" rx="34" ry="20" fill="#ffffff" opacity="0.5"/>
+  <ellipse cx="300" cy="318" rx="24" ry="14" fill="#ffffff" opacity="0.55"/>
+</svg>
