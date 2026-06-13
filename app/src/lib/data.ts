@@ -1,8 +1,73 @@
-import { supabase } from "./supabaseClient";
+import { isPlaceholderSupabase, supabase } from "./supabaseClient";
 import type { Listing, Escrow, Profile } from "./types";
+
+const PLACEHOLDER_LISTINGS: Listing[] = [
+  {
+    id: "demo-lavender-speaker",
+    onchain_item_id: 9001,
+    seller_wallet: "DemoSeller111111111111111111111111111111111",
+    title: "Portable bluetooth speaker",
+    description:
+      "Clean demo listing with a fresh battery, soft case, and meetup-ready pickup details.",
+    price_usdc: 42,
+    category: "Electronics",
+    photo_urls: [],
+    lat: 40.7128,
+    lng: -74.006,
+    status: "Active",
+    created_at: "2026-06-10T14:00:00.000Z",
+  },
+  {
+    id: "demo-oak-chair",
+    onchain_item_id: 9002,
+    seller_wallet: "DemoSeller222222222222222222222222222222222",
+    title: "Compact oak desk chair",
+    description:
+      "Comfortable secondhand chair for a small workspace. Minor wear, sturdy frame.",
+    price_usdc: 68,
+    category: "Furniture",
+    photo_urls: [],
+    lat: 40.7306,
+    lng: -73.9352,
+    status: "Active",
+    created_at: "2026-06-09T16:30:00.000Z",
+  },
+  {
+    id: "demo-denim-jacket",
+    onchain_item_id: 9003,
+    seller_wallet: "DemoSeller333333333333333333333333333333333",
+    title: "Vintage denim jacket",
+    description:
+      "Medium fit, washed blue denim, ready for another season instead of another closet.",
+    price_usdc: 35,
+    category: "Clothing",
+    photo_urls: [],
+    lat: 40.758,
+    lng: -73.9855,
+    status: "Active",
+    created_at: "2026-06-08T11:45:00.000Z",
+  },
+  {
+    id: "demo-design-books",
+    onchain_item_id: 9004,
+    seller_wallet: "DemoSeller444444444444444444444444444444444",
+    title: "Design book bundle",
+    description:
+      "Four gently used visual design books with clean pages and lots of margin notes.",
+    price_usdc: 24,
+    category: "Books",
+    photo_urls: [],
+    lat: 40.6782,
+    lng: -73.9442,
+    status: "Active",
+    created_at: "2026-06-07T19:15:00.000Z",
+  },
+];
 
 // ---------------- Listings ----------------
 export async function fetchActiveListings(): Promise<Listing[]> {
+  if (isPlaceholderSupabase) return PLACEHOLDER_LISTINGS;
+
   const { data, error } = await supabase
     .from("listings")
     .select("*")
@@ -13,6 +78,10 @@ export async function fetchActiveListings(): Promise<Listing[]> {
 }
 
 export async function fetchListing(id: string): Promise<Listing | null> {
+  if (isPlaceholderSupabase) {
+    return PLACEHOLDER_LISTINGS.find((listing) => listing.id === id) ?? null;
+  }
+
   const { data, error } = await supabase
     .from("listings")
     .select("*")
